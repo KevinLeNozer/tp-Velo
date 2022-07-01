@@ -3,8 +3,6 @@ package dall;
 import Entities.Client;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-
 public class ClientDAL {
     private final EntityManager em;
 
@@ -17,4 +15,5 @@ public class ClientDAL {
         em.persist(client);
         em.getTransaction().commit();
     }
+
 }

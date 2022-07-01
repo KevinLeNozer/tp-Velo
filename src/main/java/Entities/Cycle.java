@@ -4,6 +4,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Cycle")
@@ -27,8 +29,17 @@ public abstract class Cycle {
     @Column(name = "prixHeurs")
     private double prixheurs;
 
-    @Column(name = "estLouer",  nullable = false)
-    private boolean estLouer = false;
+
+    @ManyToMany(mappedBy = "cycles", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Location> locations = new LinkedHashSet<>();
+
+    public Set<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(Set<Location> locations) {
+        this.locations = locations;
+    }
 
     public Cycle() {
     }

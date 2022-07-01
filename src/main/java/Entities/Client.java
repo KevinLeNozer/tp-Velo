@@ -31,6 +31,8 @@ public class Client {
     @OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private Set<Location> locations = new LinkedHashSet<>();
 
+
+
     public Set<Location> getLocations() {
         return locations;
     }
@@ -42,11 +44,12 @@ public class Client {
     public Client() {
     }
 
-    public Client(String nom, String prenom, int tailleClient, double valeurPortefeuille) {
-        this.setNom(nom);
-        this.setPrenom(prenom);
-        this.setTailleClient(tailleClient);
-        this.setValeurPortefeuille(valeurPortefeuille);
+    public Client(String nom, String prenom, int tailleClient, double valeurPortefeuille, Set<Location> locations) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.tailleClient = tailleClient;
+        this.valeurPortefeuille = valeurPortefeuille;
+        this.locations = locations;
     }
 
     public long getId() {

@@ -1,21 +1,19 @@
 package dall;
 
-import Entities.Cycle;
+import Entities.Location;
 
 import javax.persistence.EntityManager;
-public class CycleDAL {
 
+public class LocationDAL {
     private final EntityManager em;
 
-    public CycleDAL() {
+    public LocationDAL() {
         this.em = ConnectionDAL.getConnection();
     }
 
-    public void saveCycle(Cycle cycle) {
+    public void saveLocation(Location location) {
         em.getTransaction().begin();
-        em.persist(cycle);
+        em.persist(location);
         em.getTransaction().commit();
     }
 }
-
-

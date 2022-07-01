@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -17,10 +18,13 @@ public class Location {
     private long id;
 
     @Column(name = "dateDebutLocation")
-    private LocalDate dateDebutLocation;
+    private LocalDateTime dateDebutLocation;
 
     @Column(name = "dateFintLocation")
-    private LocalDate dateFinLocation;
+    private LocalDateTime dateFinLocation;
+
+    @Column(name = "locationHeurs")
+    private int locationHeurs;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "client_id")
@@ -52,11 +56,20 @@ public class Location {
     public Location() {
     }
 
-    public Location(LocalDate dateDebutLocation, LocalDate dateFinLocation, Client client, Set<Cycle> cycles) {
+    public Location(LocalDateTime dateDebutLocation, LocalDateTime dateFinLocation, int locationHeurs, Client client, Set<Cycle> cycles) {
         this.dateDebutLocation = dateDebutLocation;
         this.dateFinLocation = dateFinLocation;
+        this.locationHeurs = locationHeurs;
         this.client = client;
         this.cycles = cycles;
+    }
+
+    public int getLocationHeurs() {
+        return locationHeurs;
+    }
+
+    public void setLocationHeurs(int locationHeurs) {
+        this.locationHeurs = locationHeurs;
     }
 
     public long getId() {
@@ -67,19 +80,19 @@ public class Location {
         this.id = id;
     }
 
-    public LocalDate getDateDebutLocation() {
+    public LocalDateTime getDateDebutLocation() {
         return dateDebutLocation;
     }
 
-    public void setDateDebutLocation(LocalDate dateDebutLocation) {
+    public void setDateDebutLocation(LocalDateTime dateDebutLocation) {
         this.dateDebutLocation = dateDebutLocation;
     }
 
-    public LocalDate getDateFinLocation() {
+    public LocalDateTime getDateFinLocation() {
         return dateFinLocation;
     }
 
-    public void setDateFinLocation(LocalDate dateFinLocation) {
+    public void setDateFinLocation(LocalDateTime dateFinLocation) {
         this.dateFinLocation = dateFinLocation;
     }
 }
