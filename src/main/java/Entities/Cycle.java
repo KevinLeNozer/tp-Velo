@@ -12,7 +12,7 @@ public abstract class Cycle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GenericGenerator(name = "seqGyropodes", strategy = "increment")
+    @GenericGenerator(name = "seq", strategy = "increment")
     private long id;
 
     @Column(name = "marque", length = 60, nullable = false, unique = false)
