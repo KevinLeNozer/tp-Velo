@@ -27,6 +27,9 @@ public abstract class Cycle {
     @Column(name = "prixHeurs")
     private double prixheurs;
 
+    @Column(name = "estLouer",  nullable = false)
+    private boolean estLouer = false;
+
     public Cycle() {
     }
 

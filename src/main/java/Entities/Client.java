@@ -28,6 +28,16 @@ public class Client {
     @Column(name = "valeurPortefeuille")
     private double valeurPortefeuille;
 
+    @OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    private Set<Location> locations = new LinkedHashSet<>();
+
+    public Set<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(Set<Location> locations) {
+        this.locations = locations;
+    }
 
     public Client() {
     }

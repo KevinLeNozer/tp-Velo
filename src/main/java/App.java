@@ -1,17 +1,18 @@
 import Entities.*;
+import dall.ClientDAL;
+import dall.ConnectionDAL;
+import dall.CycleDAL;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
-        EntityManagerFactory entityManager = Persistence.createEntityManagerFactory("tp-cycles");
 
-        EntityManager em = entityManager.createEntityManager();
 
         LocalDate dateDachat = LocalDate.of(2020, 10, 24);
         LocalDate dateDachatGyro = LocalDate.of(2021, 8, 12);
@@ -32,14 +33,20 @@ public class App {
         clientList.add(client1);
         clientList.add(client2);
 
-        em.getTransaction().begin();
+
+        ConnectionDAL connectionDAL = new ConnectionDAL();
+
+        EntityManager em = connectionDAL.getConnection();
+
+        CycleDAL cycleDal = new CycleDAL(em);
+        ClientDAL cleintDal = new ClientDAL();
+
         for (Cycle cycle : cycleList) {
-            em.persist(cycle);
+            cycleDal.saveCycle(cycle);
         }
 
         for (Client clients : clientList) {
-            em.persist(clients);
+            cleintDal.saveClient(clients);
         }
-        em.getTransaction().commit();
     }
 }
